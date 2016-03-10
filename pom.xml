@@ -3,13 +3,12 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-<!-- 	<parent> -->
-<!-- 		<groupId>at.molindo</groupId> -->
-<!-- 		<artifactId>molindo-oss-pom</artifactId> -->
-<!-- 		<version>5</version> -->
-<!-- 	</parent> -->
+	<parent>
+		<groupId>at.molindo</groupId>
+		<artifactId>molindo-oss-pom</artifactId>
+		<version>6-SNAPSHOT</version>
+	</parent>
 
-	<groupId>at.molindo</groupId>
 	<artifactId>spring-data-custom</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
@@ -90,7 +89,7 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
