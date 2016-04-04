@@ -17,15 +17,24 @@ package org.springframework.data.custom;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.Method;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.custom.RepositoryTest.Application;
 import org.springframework.data.custom.repository.config.EnableCustomRepositories;
+import org.springframework.data.custom.test.CustomEntity;
 import org.springframework.data.custom.test.CustomEntityRepository;
+import org.springframework.data.custom.test.CustomEntityRepositoryImpl;
+import org.springframework.data.repository.support.Repositories;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.google.common.collect.Lists;
 
 import at.molindo.utils.collections.IteratorUtils;
 
@@ -36,10 +45,25 @@ public class RepositoryTest {
 	@Autowired
 	private CustomEntityRepository repo;
 
+	@Autowired
+	private ApplicationContext applicationContext;
+
 	@Test
-	public void repositoriesAreAssignedToAppropriateStores() {
-		assertNotNull(repo.findOne(42));
+	public void crud() {
+		assertNotNull(repo.findOne(CustomEntityRepositoryImpl.KNOWN_ID));
 		assertEquals(1, IteratorUtils.list(repo.findAll()).size());
+	}
+
+	@Test
+	public void query() {
+		final Repositories repositories = new Repositories(applicationContext);
+
+		final List<Method> queries = Lists
+				.newArrayList(repositories.getRepositoryInformationFor(CustomEntity.class).getQueryMethods());
+		assertEquals(1, queries.size());
+
+		assertEquals(CustomEntityRepositoryImpl.SOMETHING, repo
+				.findSomething(CustomEntityRepositoryImpl.SOMETHING_ARG));
 	}
 
 	@EnableAutoConfiguration

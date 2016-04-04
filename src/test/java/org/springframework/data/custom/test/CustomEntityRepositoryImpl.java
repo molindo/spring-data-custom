@@ -19,14 +19,24 @@ import java.util.Collections;
 
 public class CustomEntityRepositoryImpl implements CustomEntityRepositoryCustom {
 
+	public static final int KNOWN_ID = 42;
+
+	public static final String SOMETHING_ARG = "foo";
+	public static final int SOMETHING = 4711;
+
 	@Override
 	public CustomEntity findOne(final Integer id) {
-		return id != null && id == 42 ? new CustomEntity(id, "foo") : null;
+		return id != null && id == KNOWN_ID ? new CustomEntity(KNOWN_ID, "foo") : null;
 	}
 
 	@Override
 	public Iterable<CustomEntity> findAll() {
-		return Collections.singletonList(findOne(42));
+		return Collections.singletonList(findOne(KNOWN_ID));
+	}
+
+	@Override
+	public int findSomething(final String arg) {
+		return SOMETHING_ARG.equals(arg) ? SOMETHING : null;
 	}
 
 }

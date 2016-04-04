@@ -18,16 +18,23 @@ package org.springframework.data.custom.repository.support;
 import java.io.Serializable;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.repository.core.EntityInformation;
 import org.springframework.data.repository.core.RepositoryInformation;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.ReflectionEntityInformation;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
+import org.springframework.data.repository.query.EvaluationContextProvider;
+import org.springframework.data.repository.query.QueryLookupStrategy.Key;
 
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.NonNull;
 
-@Setter
+@AllArgsConstructor
 public class CustomRepositoryFactorySupport extends RepositoryFactorySupport {
+
+	@NonNull
+	private final ApplicationContext applicationContext;
 
 	@Override
 	public <T, ID extends Serializable> EntityInformation<T, ID> getEntityInformation(final Class<T> domainClass) {
@@ -48,4 +55,10 @@ public class CustomRepositoryFactorySupport extends RepositoryFactorySupport {
 	public <T> T getRepository(final Class<T> repositoryInterface, final Object customImplementation) {
 		return super.getRepository(repositoryInterface, customImplementation);
 	}
+
+	@Override
+	protected CustomQueryLookupStrategy getQueryLookupStrategy(final Key key, final EvaluationContextProvider evaluationContextProvider) {
+		return new CustomQueryLookupStrategy(applicationContext);
+	}
+
 }

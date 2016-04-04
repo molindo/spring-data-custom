@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.data.custom.test;
+package org.springframework.data.custom.annotation;
 
-import org.springframework.data.custom.annotation.Query;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public interface CustomEntityRepositoryCustom {
+import org.springframework.data.annotation.QueryAnnotation;
 
-	CustomEntity findOne(Integer id);
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@QueryAnnotation
+@Documented
+public @interface Query {
 
-	Iterable<CustomEntity> findAll();
-
-	@Query
-	int findSomething(String arg);
 }

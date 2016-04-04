@@ -11,6 +11,7 @@ Create fully customized spring-data repositories, allowing custom code to be use
   1. Let repository extend a new interface with the `Custom` suffix
   2. Create an implementation of the new interface with the `Impl` prefix
   3. Add one or more CRUD methods named `findOne`, `save`, `findAll`, `delete` (see `DefaultCrudMethods`)
+  4. Add query methods annotated with `@Query`
 5. Export repository using `spring-data-rest`
 
 

@@ -17,6 +17,8 @@ package org.springframework.data.custom.repository.support;
 
 import java.io.Serializable;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.custom.repository.CustomRepository;
 import org.springframework.data.mapping.context.MappingContext;
 import org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport;
@@ -24,12 +26,15 @@ import org.springframework.data.repository.core.support.RepositoryFactorySupport
 
 public class CustomRepositoryFactoryBean<T extends CustomRepository<S, ID>, S, ID extends Serializable> extends RepositoryFactoryBeanSupport<T, S, ID> {
 
+	@Autowired
+	private ApplicationContext applicationContext;
+
 	public CustomRepositoryFactoryBean() {
 	}
 
 	@Override
 	protected RepositoryFactorySupport createRepositoryFactory() {
-		return new CustomRepositoryFactorySupport();
+		return new CustomRepositoryFactorySupport(applicationContext);
 	}
 
 	@Override
