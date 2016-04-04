@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>spring-data-custom</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 
 	<name>spring-data-custom</name>
 	<description>
