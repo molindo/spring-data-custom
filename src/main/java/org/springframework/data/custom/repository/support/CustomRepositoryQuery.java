@@ -19,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.query.QueryMethod;
 import org.springframework.data.repository.query.RepositoryQuery;
@@ -31,9 +32,9 @@ public class CustomRepositoryQuery implements RepositoryQuery {
 	private final QueryMethod queryMethod;
 	private final ApplicationContext applicationContext;
 
-	public CustomRepositoryQuery(@NonNull final Method method, @NonNull final RepositoryMetadata metadata, @NonNull final ApplicationContext applicationContext) {
+	public CustomRepositoryQuery(@NonNull final Method method, @NonNull final RepositoryMetadata metadata, @NonNull final ProjectionFactory factory, @NonNull final ApplicationContext applicationContext) {
 		this.method = method;
-		queryMethod = new QueryMethod(method, metadata);
+		queryMethod = new QueryMethod(method, metadata, factory);
 		this.applicationContext = applicationContext;
 	}
 

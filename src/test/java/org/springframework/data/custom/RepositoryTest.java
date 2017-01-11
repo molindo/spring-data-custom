@@ -24,7 +24,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.custom.RepositoryTest.Application;
 import org.springframework.data.custom.repository.config.EnableCustomRepositories;
@@ -32,14 +32,14 @@ import org.springframework.data.custom.test.CustomEntity;
 import org.springframework.data.custom.test.CustomEntityRepository;
 import org.springframework.data.custom.test.CustomEntityRepositoryImpl;
 import org.springframework.data.repository.support.Repositories;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.google.common.collect.Lists;
 
 import at.molindo.utils.collections.IteratorUtils;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
 public class RepositoryTest {
 
 	@Autowired

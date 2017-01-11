@@ -18,6 +18,7 @@ package org.springframework.data.custom.repository.support;
 import java.lang.reflect.Method;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.repository.core.NamedQueries;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.query.QueryLookupStrategy;
@@ -33,7 +34,8 @@ public class CustomQueryLookupStrategy implements QueryLookupStrategy {
 	private final ApplicationContext applicationContext;
 
 	@Override
-	public RepositoryQuery resolveQuery(final Method method, final RepositoryMetadata metadata, final NamedQueries namedQueries) {
-		return new CustomRepositoryQuery(method, metadata, applicationContext);
+	public RepositoryQuery resolveQuery(final Method method, final RepositoryMetadata metadata, final ProjectionFactory factory, final NamedQueries namedQueries) {
+		return new CustomRepositoryQuery(method, metadata, factory, applicationContext);
 	}
+
 }

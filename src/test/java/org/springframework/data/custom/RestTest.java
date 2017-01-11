@@ -28,8 +28,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.custom.repository.config.EnableCustomRepositories;
 import org.springframework.data.custom.test.CustomEntity;
 import org.springframework.data.custom.test.CustomEntityRepository;
@@ -40,7 +40,7 @@ import org.springframework.hateoas.core.DefaultRelProvider;
 import org.springframework.hateoas.hal.Jackson2HalModule;
 import org.springframework.hateoas.hal.Jackson2HalModule.HalHandlerInstantiator;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -50,13 +50,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = RestTest.Application.class)
-@WebIntegrationTest({ "server.port=0", "management.port=0" })
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = RestTest.Application.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 @SuppressWarnings("serial")
 public class RestTest {
 
-	private static final MediaType CONTENT_READ = MediaType.valueOf("application/hal+json");
+	private static final MediaType CONTENT_READ = MediaType.valueOf("application/hal+json;charset=UTF-8");
 
 	@Value("${local.server.port}")
 	private int _port;
