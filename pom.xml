@@ -112,7 +112,7 @@
 	</dependencies>
 
 	<properties>
-		<spring-cloud-release-train.version>Camden.SR3</spring-cloud-release-train.version>
+		<spring-cloud-release-train.version>Camden.SR4</spring-cloud-release-train.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
