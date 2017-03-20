@@ -32,4 +32,6 @@ public class CustomEntity {
 	private Integer id;
 
 	private String message;
+
+	private CustomNotAnEntity notAnEntity;
 }

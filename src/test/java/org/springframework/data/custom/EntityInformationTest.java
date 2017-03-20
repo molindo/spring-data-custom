@@ -26,9 +26,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.custom.EntityInformationTest.Application;
+import org.springframework.data.custom.mapping.CustomMappingContext;
 import org.springframework.data.custom.repository.config.EnableCustomRepositories;
 import org.springframework.data.custom.test.CustomEntity;
 import org.springframework.data.custom.test.CustomEntityRepository;
+import org.springframework.data.custom.test.CustomNotAnEntity;
 import org.springframework.data.custom.test.JpaEntity;
 import org.springframework.data.custom.test.JpaEntityRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -52,6 +54,14 @@ public class EntityInformationTest {
 		assertThat(repositories.getEntityInformationFor(JpaEntity.class), is(instanceOf(JpaEntityInformation.class)));
 		assertThat(repositories
 				.getEntityInformationFor(CustomEntity.class), is(instanceOf(ReflectionEntityInformation.class)));
+
+	}
+
+	@Test
+	public void nestedClassesAreNotPickedUpAsEntities() {
+		final CustomMappingContext cmc = _context.getBean(CustomMappingContext.class);
+		assertNotNull(cmc.getPersistentEntity(CustomEntity.class));
+		assertNull(cmc.getPersistentEntity(CustomNotAnEntity.class));
 	}
 
 	@EnableAutoConfiguration

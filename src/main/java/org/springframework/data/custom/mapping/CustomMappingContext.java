@@ -18,6 +18,8 @@ package org.springframework.data.custom.mapping;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 
+import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.data.custom.annotation.Custom;
 import org.springframework.data.mapping.context.AbstractMappingContext;
 import org.springframework.data.mapping.model.SimpleTypeHolder;
 import org.springframework.data.util.TypeInformation;
@@ -35,6 +37,15 @@ public class CustomMappingContext extends AbstractMappingContext<CustomPersisten
 	@Override
 	protected CustomPersistentProperty createPersistentProperty(final Field field, final PropertyDescriptor descriptor, final CustomPersistentEntityImpl<?> owner, final SimpleTypeHolder simpleTypeHolder) {
 		return new CustomPersistentProperty(field, descriptor, owner, simpleTypeHolder);
+	}
+
+	@Override
+	protected boolean shouldCreatePersistentEntityFor(final TypeInformation<?> type) {
+		return super.shouldCreatePersistentEntityFor(type) && typeHasCustomAnnotation(type);
+	}
+
+	private boolean typeHasCustomAnnotation(final TypeInformation<?> type) {
+		return AnnotationUtils.findAnnotation(type.getType(), Custom.class) != null;
 	}
 
 }
