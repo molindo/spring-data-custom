@@ -26,7 +26,7 @@ public class CustomEntityRepositoryImpl implements CustomEntityRepositoryCustom 
 
 	@Override
 	public CustomEntity findOne(final Integer id) {
-		return id != null && id == KNOWN_ID ? new CustomEntity(KNOWN_ID, "foo") : null;
+		return id != null && id == KNOWN_ID ? new CustomEntity(KNOWN_ID, "foo", new CustomNotAnEntity("bar")) : null;
 	}
 
 	@Override

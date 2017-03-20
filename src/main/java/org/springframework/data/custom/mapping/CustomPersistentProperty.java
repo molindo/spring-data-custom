@@ -18,6 +18,8 @@ package org.springframework.data.custom.mapping;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 
+import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.data.custom.annotation.Custom;
 import org.springframework.data.mapping.Association;
 import org.springframework.data.mapping.PersistentEntity;
 import org.springframework.data.mapping.model.AnnotationBasedPersistentProperty;
@@ -32,6 +34,15 @@ public class CustomPersistentProperty extends AnnotationBasedPersistentProperty<
 	@Override
 	protected Association<CustomPersistentProperty> createAssociation() {
 		return new Association<CustomPersistentProperty>(this, null);
+	}
+
+	@Override
+	public boolean isEntity() {
+		return !isTransient() && typeHasCustomAnnotation();
+	}
+
+	private boolean typeHasCustomAnnotation() {
+		return AnnotationUtils.findAnnotation(getType(), Custom.class) != null;
 	}
 
 }
