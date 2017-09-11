@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>spring-data-custom</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 
 	<name>spring-data-custom</name>
 	<description>
@@ -111,7 +111,7 @@
 	</dependencies>
 
 	<properties>
-		<spring-cloud-release-train.version>Camden.SR4</spring-cloud-release-train.version>
+		<spring-cloud-release-train.version>Camden.SR7</spring-cloud-release-train.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
